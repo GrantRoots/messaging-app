@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -20,30 +21,21 @@ model User {
   password String
   firstName String @db.VarChar(255)
   lastName String @db.VarChar(255)
-  blogs Blog[]
-  comments Comment[]
-  author Boolean @default(false)
+  messages Message[]
+  chatrooms Chatroom[]
 }
 
-model Blog {
-  id    Int @id @default(autoincrement())
-  title String @db.VarChar(255)
-  text  String
-  author User @relation(fields: [authorId], references: [id])
-  authorId Int
-  comments Comment[]
-  createdAt DateTime @default(now())
-  published Boolean @default(false)
-
-  @@unique([authorId, title])
-}
-
-model Comment {
+model Chatroom {
   id Int @id @default(autoincrement())
-  text String @db.VarChar(255)
-  author User @relation(fields: [authorId], references: [id])
-  authorId Int
-  blog Blog @relation(fields: [blogId], references: [id])
-  blogId Int
+  users User[]
+  messages Message[]
+}
+
+model Message {
+  id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  chatroom  Chatroom @relation(fields: [chatroomId], references: [id])
+  chatroomId Int
 }

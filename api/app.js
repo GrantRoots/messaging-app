@@ -10,7 +10,6 @@ const prisma = require("./prisma");
 const cors = require("cors");
 
 const userRouter = require("./routes/user");
-const blogsRouter = require("./routes/blogs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -79,7 +78,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/user", userRouter);
-app.use("/blogs", blogsRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);
