@@ -1,0 +1,30 @@
+import App from "./App";
+import { Login } from "./components/Login";
+import { Signup } from "./components/Signup";
+import { CreateComment } from "./components/CreateComment";
+import { Update } from "./components/Update";
+
+const routes = [
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
+  },
+  {
+    path: "create",
+    element: <CreateComment />,
+  },
+  {
+    path: "update",
+    element: <Update />,
+  },
+];
+
+export default routes;
