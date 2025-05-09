@@ -13,16 +13,13 @@ function Signup() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch(
-        "https://square-lianne-grantroots-428bd7ba.koyeb.app/user/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch("http://localhost:3000/user/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       if (response.ok) {
         navigate("/");
@@ -54,7 +51,7 @@ function Signup() {
 
         <button type="submit">Submit</button>
       </form>
-      {error === null ? "" : <div>{error}</div>}
+      {error && <div>{error}</div>}
       <Link to={"/"}>
         <button>Home</button>
       </Link>
