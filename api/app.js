@@ -14,8 +14,6 @@ const chatroomsRouter = require("./routes/chatrooms");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
@@ -74,6 +72,7 @@ app.use(
   })
 );
 app.use(passport.session());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

@@ -19,6 +19,7 @@ function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+        mode: "cors",
       });
       const resData = await response.json();
 

@@ -10,15 +10,16 @@ function App() {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
-    if (token) setLoggedIn(true);
+    if (token && loggedIn === false) setLoggedIn(true);
     try {
-      const response = await fetch("http://localhost:300/chatrooms", {
+      const response = await fetch("http://localhost:3000/chatrooms", {
+        method: "POST",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-          body: JSON.stringify(userId),
         },
+        body: JSON.stringify({ userId }),
       });
       if (!response.ok) return;
       const data = await response.json();
@@ -43,7 +44,7 @@ function App() {
         </Link>
         {loggedIn && (
           <>
-            <div>"Username" Is Logged In</div>
+            <div>"Store username" Is Logged In</div>
             <Link to={"message"}>
               <button className={styles.button}>Send A New Message</button>
             </Link>
@@ -52,7 +53,13 @@ function App() {
         )}
       </header>
       <main className={styles.main}>
-        {chatrooms.length > 0 && <div>{chatrooms.map()}</div>}
+        {chatrooms.length > 0 && (
+          <div>
+            {chatrooms.map((room) => {
+              return <div>{room.users[1].username}'s Chatroom</div>;
+            })}
+          </div>
+        )}
         {chatrooms.length < 1 && (
           <div>No chatrooms yet click "Send A New Message" to get started!</div>
         )}
@@ -62,12 +69,3 @@ function App() {
 }
 
 export default App;
-
-//shows all their chatrooms on the main page
-
-//They will have to search a username to send them a message
-//then it opens a chatroom with them
-
-//make sure chat rooms only have 2 people allowed in them?
-
-//customize profile part - change username, add photo?

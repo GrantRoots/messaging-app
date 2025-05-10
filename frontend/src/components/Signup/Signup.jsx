@@ -19,6 +19,7 @@ function Signup() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+        mode: "cors",
       });
 
       if (response.ok) {

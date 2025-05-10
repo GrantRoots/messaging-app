@@ -1,10 +1,9 @@
-const { message } = require("../prisma");
 const db = require("../queries/chatrooms");
 
 async function showChatrooms(req, res, next) {
   try {
-    const data = await db.getUserChatrooms(req.body.id);
-    res.json(data.chatrooms);
+    const data = await db.getUserChatrooms(req.body.userId);
+    res.json(data[0].chatrooms);
   } catch (error) {
     next(error);
   }
@@ -12,15 +11,16 @@ async function showChatrooms(req, res, next) {
 
 async function createRoom(req, res, next) {
   try {
-    const recipientId = await db.findUserId(req.body.reciepientUsername);
-    if (!recipientId) {
+    const recipient = await db.findUserId(req.body.reciepientUsername);
+    if (!recipient) {
       res.json({
         success: false,
         message: "User doesn't exist",
       });
     }
+    const recipientId = recipient.id;
     const sendersRooms = await db.getUserChatrooms(req.body.userId);
-    const exists = sendersRooms.chatrooms.some((room) =>
+    const exists = sendersRooms[0].chatrooms.some((room) =>
       room.users.some((user) => user.id === recipientId)
     );
     if (exists) {

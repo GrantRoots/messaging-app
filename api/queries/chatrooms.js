@@ -4,7 +4,14 @@ async function getUserChatrooms(id) {
   try {
     return await prisma.user.findMany({
       where: {
-        id: id,
+        id: parseInt(id),
+      },
+      include: {
+        chatrooms: {
+          include: {
+            users: true,
+          },
+        },
       },
     });
   } catch (error) {
@@ -28,7 +35,7 @@ async function createRoom(senderId, recipientId) {
   await prisma.chatroom.create({
     data: {
       users: {
-        connect: [{ id: senderId }, { id: recipientId }],
+        connect: [{ id: parseInt(senderId) }, { id: parseInt(recipientId) }],
       },
     },
   });

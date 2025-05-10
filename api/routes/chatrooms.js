@@ -2,9 +2,9 @@ const chatroomsRouter = require("express").Router();
 const chatroomsController = require("../controllers/chatrooms");
 const passport = require("passport");
 
-chatroomsRouter.get("/", chatroomsController.showChatrooms);
+chatroomsRouter.post("/", chatroomsController.showChatrooms);
 chatroomsRouter.post(
-  "/",
+  "/create",
   passport.authenticate("jwt", { session: false }),
   chatroomsController.createRoom
 );
