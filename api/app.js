@@ -4,8 +4,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-//will have to change the output in prisma schema and this line to import from the /prisma/generated/client file
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient } = require("./generated/prisma");
 const prisma = require("./prisma");
 const cors = require("cors");
 

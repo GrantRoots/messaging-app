@@ -35,20 +35,18 @@ function App() {
   return (
     <>
       <header className={styles.header}>
-        {!loggedIn && (
-          <>
-            <Link to={"signup"}>
-              <button className={styles.button}>Sign Up</button>
-            </Link>
-            <Link to={"login"}>
-              <button className={styles.button}>Log In</button>
-            </Link>
-          </>
-        )}
+        <Link to={"signup"}>
+          <button className={styles.button}>Sign Up</button>
+        </Link>
+        <Link to={"login"}>
+          <button className={styles.button}>Log In</button>
+        </Link>
         {loggedIn && (
           <>
             <div>"Username" Is Logged In</div>
-            <button className={styles.button}>Send A New Message</button>
+            <Link to={"message"}>
+              <button className={styles.button}>Send A New Message</button>
+            </Link>
             <button className={styles.button}>Customize Profile</button>
           </>
         )}
