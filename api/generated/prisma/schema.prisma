@@ -33,6 +33,7 @@ model Chatroom {
 
 model Message {
   id         Int      @id @default(autoincrement())
+  content    String   @db.VarChar(1000)
   createdAt  DateTime @default(now())
   user       User     @relation(fields: [userId], references: [id])
   userId     Int

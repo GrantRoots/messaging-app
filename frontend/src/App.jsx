@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 function App() {
   const [chatrooms, setChatrooms] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+  const username = localStorage.getItem("username");
 
   async function findUserChatrooms() {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
-    if (token && loggedIn === false) setLoggedIn(true);
+    if (token && !loggedIn) setLoggedIn(true);
     try {
       const response = await fetch("http://localhost:3000/chatrooms", {
         method: "POST",
@@ -44,7 +45,7 @@ function App() {
         </Link>
         {loggedIn && (
           <>
-            <div>"Store username" Is Logged In</div>
+            <div>{username} Is Logged In</div>
             <Link to={"message"}>
               <button className={styles.button}>Send A New Message</button>
             </Link>
@@ -56,7 +57,15 @@ function App() {
         {chatrooms.length > 0 && (
           <div>
             {chatrooms.map((room) => {
-              return <div>{room.users[1].username}'s Chatroom</div>;
+              return (
+                <div key={room.id}>
+                  <div>{room.users[1].username}'s Chatroom</div>
+                  {console.log(room)}
+                  <Link to={`room/${room.id}`}>
+                    <button>Open</button>
+                  </Link>
+                </div>
+              );
             })}
           </div>
         )}

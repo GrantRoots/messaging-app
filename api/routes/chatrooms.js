@@ -8,10 +8,15 @@ chatroomsRouter.post(
   passport.authenticate("jwt", { session: false }),
   chatroomsController.createRoom
 );
-// chatroomsRouter.get(
-//   "/:roomId",
-//   passport.authenticate("jwt", { session: false }),
-//   chatroomsController.getRoom
-// );
+chatroomsRouter.post(
+  "/message",
+  passport.authenticate("jwt", { session: false }),
+  chatroomsController.sendMessage
+);
+chatroomsRouter.get(
+  "/:roomId",
+  passport.authenticate("jwt", { session: false }),
+  chatroomsController.getRoom
+);
 
 module.exports = chatroomsRouter;

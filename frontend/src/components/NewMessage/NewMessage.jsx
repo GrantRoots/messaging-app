@@ -39,8 +39,8 @@ function NewMessage() {
   return (
     <>
       <form onSubmit={handleSend}>
-        <label htmlFor="reciepientUsername">Send To:</label>
-        <input type="text" name="reciepientUsername" placeholder="Username" />
+        <label htmlFor="recipientUsername">Send To:</label>
+        <input type="text" name="recipientUsername" placeholder="Username" />
         <label htmlFor="message">First Message:</label>
         <input type="text" name="message" />
         <input type="hidden" name="userId" value={userId} />
