@@ -75,6 +75,11 @@ function Chatroom() {
 
   return (
     <>
+      {!room && (
+        <div className={styles.container}>
+          Room not found please try again...
+        </div>
+      )}
       {room && (
         <div className={styles.container}>
           <h1 className={styles.h1}>
