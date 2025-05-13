@@ -27,6 +27,7 @@ function Customize() {
       const responseData = await response.json();
 
       if (responseData.success) {
+        localStorage.setItem("username", e.target.newUsername.value);
         navigate("/");
       } else {
         setError(responseData.message);
