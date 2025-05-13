@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Chatroom.module.css";
 
@@ -7,6 +7,7 @@ function Chatroom() {
   const [error, setError] = useState(null);
   const [room, setRoom] = useState(null);
   const { roomId } = useParams();
+  const formRef = useRef(null);
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
@@ -34,10 +35,6 @@ function Chatroom() {
       console.error("Network or server error:", err);
     }
   }
-
-  useEffect(() => {
-    getRoom();
-  }, []);
 
   async function handleSend(e) {
     e.preventDefault();
@@ -68,11 +65,19 @@ function Chatroom() {
     }
   }
 
+  useEffect(() => {
+    formRef.current.scrollIntoView();
+  }, [room]);
+
+  useEffect(() => {
+    getRoom();
+  }, []);
+
   return (
     <>
       {room && (
         <div className={styles.container}>
-          <h1>
+          <h1 className={styles.h1}>
             {username === room.users[0].username
               ? room.users[1].username
               : room.users[0].username}
@@ -100,7 +105,7 @@ function Chatroom() {
           })}
         </div>
       )}
-      <div className={styles.form}>
+      <div className={styles.form} ref={formRef}>
         <form onSubmit={handleSend}>
           <label htmlFor="message">New Message:</label>
           <input type="text" name="message" />

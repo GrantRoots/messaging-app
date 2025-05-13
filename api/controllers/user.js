@@ -68,7 +68,32 @@ function logIn(req, res, next) {
   })(req, res, next);
 }
 
+const validateUsername = [body("newUsername").trim().notEmpty().escape()];
+
+const updateProfile = [
+  validateUsername,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.error(errors);
+      return res
+        .status(400)
+        .json({ error: "Sign Up failed", details: errors.array() });
+    }
+    try {
+      await db.updateProfile(req.body.newUsername, req.body.oldUsername);
+      return res.json({
+        success: true,
+        message: "Updated Profile",
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+];
+
 module.exports = {
   signUp,
   logIn,
+  updateProfile,
 };

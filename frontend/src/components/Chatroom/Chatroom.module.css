@@ -37,3 +37,8 @@
 .home {
   margin-top: 30%;
 }
+
+.h1 {
+  top: 2%;
+  position: sticky;
+}

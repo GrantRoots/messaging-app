@@ -89,7 +89,7 @@ async function getRoom(req, res, next) {
     const room = await db.getRoom(req.params.roomId);
     if (!room) {
       return res.json({
-        success: true,
+        success: false,
         message: "Room failed to fetch, try again",
       });
     }

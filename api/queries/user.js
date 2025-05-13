@@ -12,4 +12,15 @@ async function signUp(username, hashedPassword, firstName, lastName, author) {
   });
 }
 
-module.exports = { signUp };
+async function updateProfile(newUsername, oldUsername) {
+  await prisma.user.update({
+    where: {
+      username: oldUsername,
+    },
+    data: {
+      username: newUsername,
+    },
+  });
+}
+
+module.exports = { signUp, updateProfile };

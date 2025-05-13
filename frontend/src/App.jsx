@@ -49,13 +49,15 @@ function App() {
             <Link to={"message"}>
               <button className={styles.button}>Send A New Message</button>
             </Link>
-            <button className={styles.button}>Customize Profile</button>
+            <Link to={"customize"}>
+              <button className={styles.button}>Customize Profile</button>
+            </Link>
           </>
         )}
       </header>
       <main className={styles.main}>
         {chatrooms.length > 0 && (
-          <div>
+          <div className={styles.room}>
             {chatrooms.map((room) => {
               return (
                 <div key={room.id}>
