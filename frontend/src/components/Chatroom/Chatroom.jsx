@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "./Chatroom.module.css";
 
 function Chatroom() {
   const [error, setError] = useState(null);
@@ -7,6 +9,7 @@ function Chatroom() {
   const { roomId } = useParams();
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
 
   async function getRoom() {
     try {
@@ -23,7 +26,6 @@ function Chatroom() {
       const responseData = await response.json();
 
       if (responseData.success) {
-        console.log(responseData.room);
         setRoom(responseData.room);
       } else {
         setError(responseData.message);
@@ -56,6 +58,7 @@ function Chatroom() {
       const responseData = await response.json();
 
       if (responseData.success) {
+        //then clear message box
         getRoom();
       } else {
         setError(responseData.message);
@@ -67,18 +70,49 @@ function Chatroom() {
 
   return (
     <>
-      {room &&
-        room.messages.map((message) => {
-          return <div key={message.id}>{message.content}</div>;
-        })}
-      <form onSubmit={handleSend}>
-        <label htmlFor="message">New Message:</label>
-        <input type="text" name="message" />
-        <input type="hidden" name="roomId" value={roomId} />
-        <input type="hidden" name="userId" value={userId} />
-        <button type="submit">Send</button>
-      </form>
-      {error && <div>{error}</div>}
+      {room && (
+        <div className={styles.container}>
+          <h1>
+            {username === room.users[0].username
+              ? room.users[1].username
+              : room.users[0].username}
+          </h1>
+          {room.messages.map((message) => {
+            console.log(room);
+            return (
+              <div
+                key={message.id}
+                className={`${styles.message} ${
+                  parseInt(userId) === message.userId
+                    ? styles.right
+                    : styles.left
+                }`}
+              >
+                <div>{message.content}</div>
+                <div>
+                  {new Date(message.createdAt).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      <div className={styles.form}>
+        <form onSubmit={handleSend}>
+          <label htmlFor="message">New Message:</label>
+          <input type="text" name="message" />
+          <input type="hidden" name="roomId" value={roomId} />
+          <input type="hidden" name="userId" value={userId} />
+          <button type="submit">Send</button>
+        </form>
+        {error && <div>{error}</div>}
+        <Link to={"/"}>
+          <button className={styles.home}>Home</button>
+        </Link>
+      </div>
     </>
   );
 }

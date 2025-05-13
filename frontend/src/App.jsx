@@ -59,8 +59,12 @@ function App() {
             {chatrooms.map((room) => {
               return (
                 <div key={room.id}>
-                  <div>{room.users[1].username}'s Chatroom</div>
-                  {console.log(room)}
+                  <div>
+                    {room.users[0].username === username
+                      ? room.users[1].username
+                      : room.users[0].username}
+                    's Chatroom
+                  </div>
                   <Link to={`room/${room.id}`}>
                     <button>Open</button>
                   </Link>
