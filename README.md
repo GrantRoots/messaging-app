@@ -1,3 +1,3 @@
 # blog-api
 
-This is a blogging app I made using express and react. I used express and prisma with psql to create my api. Then I used react to create 2 simple front ends. One to create and publish blogs and one to read and write comments on blogs. Both use jwt to authenticate requests.
+This is an app I made using express, prisma, psql, and react. It's a messaging app like the one on a phone. Users can make an account and login then type a username to send a new message and it will open a chatroom for the both of them where they can send messages back and forth. They can also update their username
