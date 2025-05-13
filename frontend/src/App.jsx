@@ -57,10 +57,10 @@ function App() {
       </header>
       <main className={styles.main}>
         {chatrooms.length > 0 && (
-          <div className={styles.room}>
+          <div>
             {chatrooms.map((room) => {
               return (
-                <div key={room.id}>
+                <div key={room.id} className={styles.room}>
                   <div>
                     {room.users[0].username === username
                       ? room.users[1].username
