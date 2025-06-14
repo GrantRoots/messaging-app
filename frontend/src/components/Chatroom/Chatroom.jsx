@@ -11,19 +11,17 @@ function Chatroom() {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function getRoom() {
     try {
-      const response = await fetch(
-        `http://localhost:3000/chatrooms/${roomId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          mode: "cors",
-        }
-      );
+      const response = await fetch(`${API_URL}/chatrooms/${roomId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+      });
       const responseData = await response.json();
 
       if (responseData.success) {
@@ -43,7 +41,7 @@ function Chatroom() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("http://localhost:3000/chatrooms/message", {
+      const response = await fetch(`${API_URL}/chatrooms/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,13 +112,14 @@ function Chatroom() {
         <form onSubmit={handleSend}>
           <label htmlFor="message">New Message:</label>
           <input type="text" name="message" />
+
           <input type="hidden" name="roomId" value={roomId} />
           <input type="hidden" name="userId" value={userId} />
           <button type="submit">Send</button>
         </form>
         {error && <div>{error}</div>}
-        <Link to={"/"}>
-          <button className={styles.home}>Home</button>
+        <Link to={"/"} className={styles.home}>
+          Home
         </Link>
       </div>
     </>

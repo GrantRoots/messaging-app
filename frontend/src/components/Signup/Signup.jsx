@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Signup() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -13,7 +14,7 @@ function Signup() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("http://localhost:3000/user/signup", {
+      const response = await fetch(`${API_URL}/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +34,8 @@ function Signup() {
   }
 
   return (
-    <>
+    <main>
+      <h1>Sign Up</h1>
       <form onSubmit={onSubmit}>
         <label htmlFor="username">Username: </label>
         <input type="text" name="username" required />
@@ -53,10 +55,8 @@ function Signup() {
         <button type="submit">Submit</button>
       </form>
       {error && <div>{error}</div>}
-      <Link to={"/"}>
-        <button>Home</button>
-      </Link>
-    </>
+      <Link to={"/"}>Home</Link>
+    </main>
   );
 }
 

@@ -6,6 +6,7 @@ function App() {
   const [chatrooms, setChatrooms] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const username = localStorage.getItem("username");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function findUserChatrooms() {
     const token = localStorage.getItem("token");
@@ -13,7 +14,7 @@ function App() {
 
     if (token && !loggedIn) setLoggedIn(true);
     try {
-      const response = await fetch("http://localhost:3000/chatrooms", {
+      const response = await fetch(`${API_URL}/chatrooms`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -37,46 +38,53 @@ function App() {
   return (
     <>
       <header className={styles.header}>
-        <Link to={"signup"}>
-          <button className={styles.button}>Sign Up</button>
-        </Link>
-        <Link to={"login"}>
-          <button className={styles.button}>Log In</button>
-        </Link>
+        {!loggedIn && (
+          <>
+            <Link to={"signup"} className={styles.button}>
+              Sign Up
+            </Link>
+            <Link to={"login"} className={styles.button}>
+              Log In
+            </Link>
+          </>
+        )}
         {loggedIn && (
           <>
-            <div>{username} Is Logged In</div>
-            <Link to={"message"}>
-              <button className={styles.button}>Send A New Message</button>
-            </Link>
-            <Link to={"customize"}>
-              <button className={styles.button}>Customize Profile</button>
-            </Link>
+            <div>{username}</div>
+            <div>
+              <Link to={"message"}>Send A New Message</Link>
+              <Link to={"customize"}>Customize Profile</Link>
+            </div>
           </>
         )}
       </header>
       <main className={styles.main}>
-        {chatrooms.length > 0 && (
-          <div>
-            {chatrooms.map((room) => {
-              return (
-                <div key={room.id} className={styles.room}>
-                  <div>
-                    {room.users[0].username === username
-                      ? room.users[1].username
-                      : room.users[0].username}
-                    's Chatroom
-                  </div>
-                  <Link to={`room/${room.id}`}>
-                    <button>Open</button>
-                  </Link>
+        {chatrooms.length > 0 &&
+          chatrooms.map((room) => {
+            return (
+              <div key={room.id} className={styles.room}>
+                <div>
+                  {room.users[0].username === username
+                    ? room.users[1].username
+                    : room.users[0].username}
+                  's Chatroom
                 </div>
-              );
-            })}
-          </div>
-        )}
+                <Link to={`room/${room.id}`}>
+                  Open{" "}
+                  <img
+                    width="50"
+                    height="50"
+                    src="https://img.icons8.com/ios/50/right--v1.png"
+                    alt="right--v1"
+                  />
+                </Link>
+              </div>
+            );
+          })}
         {chatrooms.length < 1 && (
-          <div>No chatrooms yet click "Send A New Message" to get started!</div>
+          <div>
+            No chatrooms yet Login or click "Send A New Message" to get started!
+          </div>
         )}
       </main>
     </>

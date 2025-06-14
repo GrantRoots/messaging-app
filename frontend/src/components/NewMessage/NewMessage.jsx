@@ -6,6 +6,7 @@ function NewMessage() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function handleSend(e) {
     e.preventDefault();
@@ -15,7 +16,7 @@ function NewMessage() {
 
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:3000/chatrooms/create", {
+      const response = await fetch(`${API_URL}/chatrooms/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +38,8 @@ function NewMessage() {
   }
 
   return (
-    <>
+    <main>
+      <h1>New Message</h1>
       <form onSubmit={handleSend}>
         <label htmlFor="recipientUsername">Send To:</label>
         <input type="text" name="recipientUsername" placeholder="Username" />
@@ -48,7 +50,7 @@ function NewMessage() {
       </form>
       {error && <div>{error}</div>}
       <Link to={"/"}>Home</Link>
-    </>
+    </main>
   );
 }
 

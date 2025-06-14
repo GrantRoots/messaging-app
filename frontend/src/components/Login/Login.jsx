@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -13,7 +14,7 @@ function Login() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("http://localhost:3000/user/login", {
+      const response = await fetch(`${API_URL}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +38,8 @@ function Login() {
   }
 
   return (
-    <>
+    <main>
+      <h1>Login</h1>
       <form onSubmit={handleLogin}>
         <label htmlFor="username">Username: </label>
         <input type="text" name="username" />
@@ -46,10 +48,8 @@ function Login() {
         <button type="submit">Submit</button>
       </form>
       {error && <div>{error}</div>}
-      <Link to={"/"}>
-        <button>Home</button>
-      </Link>
-    </>
+      <Link to={"/"}>Home</Link>
+    </main>
   );
 }
 

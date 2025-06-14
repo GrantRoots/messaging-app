@@ -20,8 +20,8 @@
 .message {
   width: 40%;
   margin: 1%;
-  padding: 0.7%;
-  border-radius: 20%;
+  padding: 1rem;
+  border-radius: 2rem;
   color: white;
 }
 
@@ -34,8 +34,17 @@
   min-height: 20vh;
 }
 
-.home {
-  margin-top: 30%;
+.form form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form button {
+  background-color: blue;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem;
 }
 
 .h1 {

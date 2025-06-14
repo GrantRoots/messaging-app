@@ -1,4 +1,54 @@
-html,
 body {
   margin: 0;
+}
+
+* {
+  font-family: Roboto;
+}
+
+header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  outline: 1px solid;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: rgb(255, 221, 0);
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 90vh;
+
+  background-color: white;
+}
+
+a {
+  margin: 0.3rem;
+  text-decoration: none;
+  color: inherit;
+  outline: 1px solid;
+  padding: 1rem;
+  display: inline-block;
+  border-radius: 1rem;
+  background-color: white;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > * {
+  margin: 0.2rem;
+}
+
+form button {
+  background-color: gray;
+  color: white;
 }
