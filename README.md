@@ -4,7 +4,7 @@ Messaging app inspired by the app on an iphone. Built with Express, Prisma (Post
 
 ## Live
 
-<a href="https://messaging-app-gr.netlify.app" target="_blank" rel="noopener noreferrer">https://messaging-app-gr.netlify.app</a>
+https://messaging-app-gr.netlify.app
 
 Frontend deployed on Netlify
 Backend hosted on Koyeb
