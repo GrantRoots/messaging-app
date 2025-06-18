@@ -25,9 +25,9 @@ Backend hosted on Koyeb
 
 - Open new terminal window for the frontend
 
-6. `cd messaging-app/frontend`
-7. `npm install`
-8. `npm run dev`
+5. `cd messaging-app/frontend`
+6. `npm install`
+7. `npm run dev`
 
 ## Environment Variables
 
