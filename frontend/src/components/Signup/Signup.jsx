@@ -41,10 +41,10 @@ function Signup() {
         <input type="text" name="username" required />
 
         <label htmlFor="password">Password: </label>
-        <input type="text" name="password" required />
+        <input type="password" name="password" required />
 
         <label htmlFor="confirmPassword">Confirm Password: </label>
-        <input type="text" name="confirmPassword" required />
+        <input type="password" name="confirmPassword" required />
 
         <label htmlFor="firstName">First Name: </label>
         <input type="text" name="firstName" required />
