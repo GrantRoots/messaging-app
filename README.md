@@ -21,13 +21,14 @@ Backend hosted on Koyeb
 1. `git clone git@github.com:GrantRoots/messaging-app.git`
 2. `cd messaging-app/api`
 3. `npm install`
-4. `npm run start`
+4. `npm run build`
+5. `npm run start`
 
 - Open new terminal window for the frontend
 
-5. `cd messaging-app/frontend`
-6. `npm install`
-7. `npm run dev`
+1. `cd messaging-app/frontend`
+2. `npm install`
+3. `npm run dev`
 
 ## Environment Variables
 
