@@ -58,7 +58,7 @@ const createRoom = [
 ];
 
 const validateMessage = [
-  body("message").trim().notEmpty().isLength({ max: 1000 }).escape(),
+  body("message").trim().notEmpty().isLength({ max: 1000 }),
 ];
 
 const sendMessage = [
