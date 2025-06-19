@@ -1,6 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const db = require("../queries/user");
+const dbChatroomQueries = require("../queries/chatrooms");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
@@ -35,8 +36,13 @@ const signUp = [
         req.body.username,
         await bcrypt.hash(req.body.password, 10),
         req.body.firstName,
-        req.body.lastName,
-        req.body.author
+        req.body.lastName
+      );
+      const user = await db.getUser(req.body.username);
+      await dbChatroomQueries.createRoom(
+        1,
+        user.id,
+        "Hello, welcome to my messaging app! Send me a message! :)"
       );
       res.status(201).end();
     } catch (error) {

@@ -176,12 +176,11 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://grantroots:Password@localhost:5432/messaging_app?schema=public"
       }
     }
   },
